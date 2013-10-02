@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.sudheer.stock.Stock" table="stock" catalog="sudheerdb">
+        <id name="stockId" type="java.lang.Integer">
+            <column name="STOCK_ID" />
+            <generator class="identity" />
+        </id>
+        <property name="stockCode" type="string">
+            <column name="STOCK_CODE" length="10" not-null="true" unique="true" />
+        </property>
+        <property name="stockName" type="string">
+            <column name="STOCK_NAME" length="20" not-null="true" unique="true" />
+        </property>
+        <set name="stockDailyRecords" table="stock_daily_record" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="STOCK_ID" not-null="true" />
+            </key>
+            <one-to-many class="com.sudheer.stock.StockDailyRecord" />
+        </set>
+    </class>
+</hibernate-mapping>

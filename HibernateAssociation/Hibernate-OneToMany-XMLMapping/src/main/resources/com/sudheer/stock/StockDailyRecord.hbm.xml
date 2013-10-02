@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.sudheer.stock.StockDailyRecord" table="stock_daily_record" catalog="sudheerdb">
+        <id name="recordId" type="java.lang.Integer">
+            <column name="RECORD_ID" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="stock" class="com.sudheer.stock.Stock" fetch="select">
+            <column name="STOCK_ID" not-null="true" />
+        </many-to-one>
+        <property name="priceOpen" type="java.lang.Float">
+            <column name="PRICE_OPEN" precision="6" />
+        </property>
+        <property name="priceClose" type="java.lang.Float">
+            <column name="PRICE_CLOSE" precision="6" />
+        </property>
+        <property name="priceChange" type="java.lang.Float">
+            <column name="PRICE_CHANGE" precision="6" />
+        </property>
+        <property name="volume" type="java.lang.Long">
+            <column name="VOLUME" />
+        </property>
+        <property name="date" type="date">
+            <column name="DATE" length="10" not-null="true" unique="true" />
+        </property>
+    </class>
+</hibernate-mapping>
